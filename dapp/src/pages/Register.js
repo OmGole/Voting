@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import useConnect from "../hooks/useConnect";
+import useContract from "../hooks/useContract";
 
 export default function Register() {
+  const { nft } = useContract();
+  const contract = nft;
+  const { connect, account } = useConnect();
+  useEffect(() => {
+    connect();
+  },[])
   return (
     <div class="m-auto xl:container px-12 sm:px-0 mx-auto">
       <div class="mx-auto h-full sm:w-max">

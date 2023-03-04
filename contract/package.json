@@ -2,5 +2,8 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.13.0"
+  },
+  "dependencies": {
+    "openzeppelin-solidity": "^3.4.2"
   }
 }

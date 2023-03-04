@@ -9,7 +9,8 @@ import UserVerification from "./pages/UserVerification";
 function App() {
   return (
     <div className="App ">
-      <UserVerification />
+      <Home />
+      <Register/>
     </div>
   );
 }
