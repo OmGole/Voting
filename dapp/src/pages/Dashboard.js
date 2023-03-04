@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import Image from "../assets/hero1.jpg";
+import useContract from "../hooks/useContract"
 
 export default function Dashboard() {
+  const [role, setRole] = useState("");
+  const {voting} = useContract();
+  
+  useEffect(() => {
+    const getROLE = async () => {
+      const role1 = await voting.userLogin();
+      const role2 = await voting.candidateLogin();
+      console.log("role1 val: ",role1.role);
+      console.log("role2 val: ",role2.role);
+      if(role1){
+        setRole(role1.role);
+
+      }else{
+        setRole(role2.role)
+      }
+      console.log(role)
+      
+    }
+    getROLE();
+  },[]);
+
   return (
     <>
       <Nav />
@@ -30,14 +52,21 @@ export default function Dashboard() {
                   POSITION
                 </h2>
                 {/* if role == user */}
+                {role == "user" && 
                 <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
-                  Vote
-                </button>
+                Vote
+              </button>
+                }
+                
                 {/* button end */}
                 {/* if role == party */}
-                <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
+                {
+                  role == "candidate" &&
+                  <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
                   Apply
                 </button>
+                }
+                
                 {/* button end */}
               </div>
             </div>

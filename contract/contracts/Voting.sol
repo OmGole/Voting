@@ -49,7 +49,7 @@ contract Voting {
         string memory _status,
         string memory _date
     ) public returns (uint256) {
-        require(msg.sender == owner, "Not the chairperson");
+        // require(msg.sender == owner, "Not the chairperson");
         address[] memory dummy;
         ballots.push(
             Ballot(

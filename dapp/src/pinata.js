@@ -72,6 +72,7 @@ export const uploadFileToIPFS = async (file) => {
         success: true,
         pinataURL:
           "https://gateway.pinata.cloud/ipfs/" + response.data.IpfsHash,
+          hash:response.data.IpfsHash
       };
     })
     .catch(function (error) {
