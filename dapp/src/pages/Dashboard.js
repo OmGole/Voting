@@ -7,7 +7,7 @@ export default function Dashboard() {
     <>
       <Nav />
       <section class="text-gray-600 body-font">
-        <div class="container px-20 pt-24 pb-10 mx-auto">
+        <div class="container px-20 pt-20 pb-10 mx-auto">
           <h1 className="text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 bebas">
             Ongoing Elections
           </h1>
@@ -88,7 +88,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-        <div class="container px-20  mx-auto">
+        <div class="container px-20 pb-20 mx-auto">
           <h1 className="text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 bebas">
             PAST Elections
           </h1>
@@ -170,6 +170,28 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
+      {/*button component start If role == Organizer else do not render */}
+      <div className="fixed bottom-5 right-10">
+        <div className="">
+          <button className="dark-blue rounded-full">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="#bc48ff"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="white"
+              className="w-20 h-15 rounded-full"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      {/*Button component end  */}
     </>
   );
 }
