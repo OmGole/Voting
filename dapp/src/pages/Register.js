@@ -6,6 +6,8 @@ export default function Register() {
   const { connect, account } = useConnect();
   const { voting } = useContract();
   const [name, setName] = useState("");
+  const [role, setRole] = useState("user");
+
   useEffect(() => {
     connect();
   }, []);
@@ -14,8 +16,19 @@ export default function Register() {
     setName(e.target.value);
   };
 
-  const handleRegister = async () => {
-    await voting.userRegister(name);
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    if (role == "user") {
+      await voting.userRegister(name);
+    } else {
+      await voting.candidateRegister(name, "xyz");
+    }
+  };
+
+  const getUser = async (e) => {
+    e.preventDefault();
+    const user = await voting.userLogin();
+    console.log(user);
   };
 
   useEffect(() => {
@@ -44,6 +57,8 @@ export default function Register() {
                     name="cars"
                     id="cars"
                     placeholder="Role"
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
                     className="w-full bg-transparent pb-3  border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
                   >
                     <option value="user">User</option>
@@ -72,6 +87,14 @@ export default function Register() {
                 >
                   <span class="text-base font-semibold text-white dark:text-gray-900">
                     Register
+                  </span>
+                </button>
+                <button
+                  class="w-full rounded-full bg-sky-500 dark:bg-sky-400 h-11 flex items-center justify-center px-6 py-3 transition hover:bg-sky-600 focus:bg-sky-600 active:bg-sky-800"
+                  onClick={getUser}
+                >
+                  <span class="text-base font-semibold text-white dark:text-gray-900">
+                    getUser
                   </span>
                 </button>
               </div>
