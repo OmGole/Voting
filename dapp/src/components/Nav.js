@@ -1,7 +1,17 @@
 import React from "react";
 import Logo from "../assets/logo.png";
+// import { ethers } from "ethers";
+// import { useEffect, useState } from "react";
+// import useConnect from "../hooks/useConnect";
 
 export default function Nav() {
+  //   const { connect, account } = useConnect();
+
+  //   const connectWallet = async () => {};
+
+  //   useEffect(() => {
+  //     connect();
+  //   }, []);
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -11,7 +21,11 @@ export default function Nav() {
           <span className="ml-3 text-3xl bebas text-white">DVote</span>
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a className="mr-5 hover:text-white text-slate-400 poppins" href="#">
+          <a
+            className="mr-5 hover:text-white text-slate-400 poppins"
+            href="#"
+            // onClick={connectWallet}
+          >
             Register
           </a>
           <a className="mr-5 hover:text-white text-slate-400 poppins" href="#">
