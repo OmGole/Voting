@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import useConnect from "../hooks/useConnect";
 import useContract from "../hooks/useContract";
+import { uploadFileToIPFS } from "../pinata";
 
 export default function Register() {
   const { connect, account } = useConnect();
   const { voting } = useContract();
   const [name, setName] = useState("");
   const [role, setRole] = useState("user");
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     connect();
@@ -14,6 +16,12 @@ export default function Register() {
 
   const handleName = (e) => {
     setName(e.target.value);
+  };
+
+  const handleImage = async (e) => {
+    const imageResponse = await uploadFileToIPFS(e.target.files[0]);
+    setImage(imageResponse.pinataURL);
+    console.log(image.pinataURL);
   };
 
   const handleRegister = async (e) => {
@@ -62,10 +70,19 @@ export default function Register() {
                     className="w-full bg-transparent pb-3  border-b border-gray-300 dark:placeholder-gray-300 dark:border-gray-600 outline-none  invalid:border-red-400 transition"
                   >
                     <option value="user">User</option>
-                    <option value="party">Party</option>
+                    <option value="candidate">candidate</option>
                   </select>
                 </div>
               </div>
+
+              {role == "candidate" ? (
+                <div>
+                  <label>Image: </label>
+                  <input type="file" onChange={handleImage}></input>
+                </div>
+              ) : (
+                ""
+              )}
 
               <div class="flex flex-col items-end">
                 <div class="w-full relative before:absolute before:bottom-0 before:h-0.5 before:left-0 before:origin-right focus-within:before:origin-left before:right-0 before:scale-x-0 before:m-auto before:bg-sky-400 dark:before:bg-sky-800 focus-within:before:!scale-x-100 focus-within:invalid:before:bg-red-400 before:transition before:duration-300">
