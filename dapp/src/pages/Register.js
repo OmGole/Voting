@@ -20,22 +20,25 @@ export default function Register() {
 
   const handleImage = async (e) => {
     const imageResponse = await uploadFileToIPFS(e.target.files[0]);
-    setImage(imageResponse.pinataURL);
-    console.log(image.pinataURL);
+    setImage(imageResponse);
   };
+
+  useEffect(() => {
+    console.log(image);
+  }, [image]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     if (role == "user") {
       await voting.userRegister(name);
     } else {
-      await voting.candidateRegister(name, "xyz");
+      await voting.candidateRegister(name, image.hash);
     }
   };
 
   const getUser = async (e) => {
     e.preventDefault();
-    const user = await voting.userLogin();
+    const user = await voting.candidateLogin();
     console.log(user);
   };
 

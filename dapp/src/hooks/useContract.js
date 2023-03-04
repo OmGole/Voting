@@ -2,7 +2,7 @@ import Voting from "./Voting.json";
 const ethers = require("ethers");
 
 const ContractABI = Voting.abi;
-const ContractAddess = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const ContractAddess = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
 const Ethereum = typeof window !== "undefined" && window.ethereum;
 
 const useContract = () => {
