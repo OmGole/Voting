@@ -6,6 +6,7 @@ import useContract from "../hooks/useContract"
 export default function Dashboard() {
   const [role, setRole] = useState("");
   const {voting} = useContract();
+  const [ballots, setBallots] = useState([]);
   
   useEffect(() => {
     const getROLE = async () => {
@@ -23,76 +24,84 @@ export default function Dashboard() {
       
     }
     getROLE();
+    const getBallot = async () =>{
+      const poll = await voting.getBallots();
+      setBallots(poll)
+    }
+    getBallot();
   },[]);
 
   return (
     <>
       <Nav />
-      <section class="text-gray-600 body-font">
-        <div class="container px-20 pt-20 pb-10 mx-auto">
+      <section className="text-gray-600 body-font">
+        <div className="container px-20 pt-20 pb-10 mx-auto">
           <h1 className="text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 bebas">
             Ongoing Elections
           </h1>
-          <div class="flex flex-wrap -m-4 pt-10">
+          <div className="flex flex-wrap -m-4 pt-10">
             {/* Starts here */}
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-                {/* if role == user */}
-                {role == "user" && 
+            {ballots?.map(ballot=>
+            <div className="lg:w-1/4 md:w-1/2 p-4 w-full">
+            <a className="block relative h-48 rounded overflow-hidden">
+              <img
+                alt="ecommerce"
+                className="object-cover object-center w-full h-full block"
+                src={Image}
+                draggable="false"
+              />
+            </a>
+            <div className="mt-4">
+              <h3 className="text-gray-200 text-xs tracking-widest title-font mb-1">
+                {ballot.state}
+              </h3>
+              <h2 className="text-slate-200 title-font text-lg font-medium">
+                {ballot.position}
+              </h2>
+              {/* if role == user */}
+              {role == "user" && 
+              <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
+              Vote
+            </button>
+              }
+              
+              {/* button end */}
+              {/* if role == party */}
+              {
+                role == "candidate" &&
                 <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
-                Vote
+                Apply
               </button>
-                }
-                
-                {/* button end */}
-                {/* if role == party */}
-                {
-                  role == "candidate" &&
-                  <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
-                  Apply
-                </button>
-                }
-                
-                {/* button end */}
-              </div>
+              }
+              
+              {/* button end */}
             </div>
+          </div>
+            )}
+            
             {/* End here */}
           </div>
         </div>
-        <div class="container px-20 pb-20 mx-auto">
+        <div classname="container px-20 pb-20 mx-auto">
           <h1 className="text-transparent text-7xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 bebas">
             PAST Elections
           </h1>
-          <div class="flex flex-wrap -m-4 pt-10">
+          <div classname="flex flex-wrap -m-4 pt-10">
             {/* Starts here */}
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
+            <div classname="lg:w-1/4 md:w-1/2 p-4 w-full">
+              <a classname="block relative h-48 rounded overflow-hidden">
                 <img
                   alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
+                  className="object-cover object-center w-full h-full block"
                   src={Image}
                   draggable="false"
                 />
               </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
+              <div className="mt-4">
+                <h3 className="text-gray-200 text-xs tracking-widest title-font mb-1">
                   STATE
                 </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
+                <h2 className="text-slate-200 title-font text-lg font-medium">
                   POSITION
                 </h2>
               </div>
