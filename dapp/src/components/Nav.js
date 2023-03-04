@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
 // import { ethers } from "ethers";
 // import { useEffect, useState } from "react";
 // import useConnect from "../hooks/useConnect";
@@ -21,13 +22,13 @@ export default function Nav() {
           <span className="ml-3 text-3xl bebas text-white">DVote</span>
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a
+          <Link
             className="mr-5 hover:text-white text-slate-400 poppins"
-            href="#"
+            to="/register"
             // onClick={connectWallet}
           >
             Register
-          </a>
+          </Link>
           <a className="mr-5 hover:text-white text-slate-400 poppins" href="#">
             Login
           </a>

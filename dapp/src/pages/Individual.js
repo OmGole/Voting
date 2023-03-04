@@ -1,8 +1,11 @@
 import React from "react";
 import Nav from "../components/Nav";
 import Image from "../assets/hero1.jpg";
+import { useParams } from "react-router-dom";
 
 export default function Individual() {
+  let { id } = useParams();
+  console.log(id);
   return (
     <>
       <Nav />

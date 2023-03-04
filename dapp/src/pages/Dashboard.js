@@ -29,63 +29,19 @@ export default function Dashboard() {
                 <h2 class="text-slate-200 title-font text-lg font-medium">
                   POSITION
                 </h2>
+                {/* if role == user */}
+                <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
+                  Vote
+                </button>
+                {/* button end */}
+                {/* if role == party */}
+                <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
+                  Apply
+                </button>
+                {/* button end */}
               </div>
             </div>
             {/* End here */}
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-              </div>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-              </div>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-              </div>
-            </div>
           </div>
         </div>
         <div class="container px-20 pb-20 mx-auto">
@@ -113,60 +69,6 @@ export default function Dashboard() {
               </div>
             </div>
             {/* End here */}
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-              </div>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-              </div>
-            </div>
-            <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-              <a class="block relative h-48 rounded overflow-hidden">
-                <img
-                  alt="ecommerce"
-                  class="object-cover object-center w-full h-full block"
-                  src={Image}
-                  draggable="false"
-                />
-              </a>
-              <div class="mt-4">
-                <h3 class="text-gray-200 text-xs tracking-widest title-font mb-1">
-                  STATE
-                </h3>
-                <h2 class="text-slate-200 title-font text-lg font-medium">
-                  POSITION
-                </h2>
-              </div>
-            </div>
           </div>
         </div>
       </section>

@@ -1,4 +1,5 @@
 import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
@@ -8,9 +9,16 @@ import UserVerification from "./pages/UserVerification";
 
 function App() {
   return (
-    <div className="App ">
-      <UserVerification />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/individual/:id" element={<Individual />} />
+        <Route path="/createpoll" element={<Createpoll />} />
+        <Route path="/userverification" element={<UserVerification />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
