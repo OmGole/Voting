@@ -16,6 +16,7 @@ export default function Individual() {
     setCandidates(y);
   }
   const [role, setRole] = useState("");
+  const [result, setResult] = useState([]);
   const getRole = async () => {
     const role1 = await voting.userLogin();
     const role2 = await voting.candidateLogin();
@@ -32,6 +33,8 @@ export default function Individual() {
 
   const vote = async (i) => {
     await voting.voteSimple(state.c[i]);
+    const x = await voting.result(candidates);
+    setResult(x);
   }
 
   useEffect(() => {
@@ -42,6 +45,10 @@ export default function Individual() {
   useEffect(() => {
     console.log(candidates);
   },[candidates]);
+
+  useEffect(() => {
+    console.log(result);
+  },[result]);
 
 
   
