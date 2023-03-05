@@ -49,7 +49,7 @@ export default function Dashboard() {
             {ballots?.filter(ballot=>ballot.status=="initial").map((ballot,i) =>
             {
               console.log(ballot)
-            return <Link className="lg:w-1/4 md:w-1/2 p-4 w-full" to="/individual" state={{name:"om"}}>
+            return <Link className="lg:w-1/4 md:w-1/2 p-4 w-full" to="/individual" state={ballot}>
             <div>
             <a className="block relative h-48 rounded overflow-hidden">
               <img
@@ -109,9 +109,12 @@ export default function Dashboard() {
               </h2>
               {/* if role == user */}
               {role == "user" && 
+              <Link to="/UserVerification" state={ballot}>
+
               <button className="bg-[#5D9C59] text-white font-bold py-2 px-4 rounded-lg">
               Vote
             </button>
+              </Link>
               }
               
               {/* button end */}

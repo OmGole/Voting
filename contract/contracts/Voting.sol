@@ -26,6 +26,7 @@ contract Voting {
         uint256 votes;
         string hash;
         string role;
+        bool applied;
     }
 
     struct User {
@@ -68,7 +69,9 @@ contract Voting {
     }
 
     function addCandidate(uint256 _index) public {
+        require(candidates[msg.sender].applied == false, "Already Applied");
         ballots[_index].c.push(msg.sender);
+        candidates[msg.sender].applied = true;
     }
 
     function getBallots() public view returns (Ballot[] memory) {
@@ -80,7 +83,7 @@ contract Voting {
         string memory _hash
     ) public payable {
         // require(bytes(user[msg.sender]).length == 0, "Already registered!");
-        Candidate memory newCandidate = Candidate(_name, 0, _hash, "candidate");
+        Candidate memory newCandidate = Candidate(_name, 0, _hash, "candidate",false);
         candidates[msg.sender] = newCandidate;
     }
 

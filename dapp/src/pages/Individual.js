@@ -1,11 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import Image from "../assets/hero1.jpg";
-import { useParams } from "react-router-dom";
+import useContract from "../hooks/useContract"
+import { useLocation } from "react-router-dom";
 
 export default function Individual() {
-  // let { id } = useParams();
-  // console.log(state);
+  let { state } = useLocation();
+  const {voting} = useContract();
+  const [candidates,setCandidates] = useState([]);
+  const getCandidates = async () => {
+    const y = await Promise.all(state.c.map(async candidate => {
+    const x = await voting.getCandidate(candidate);
+    return x;
+    }));
+    setCandidates(y);
+  }
+  const [role, setRole] = useState("");
+  const getRole = async () => {
+    const role1 = await voting.userLogin();
+    const role2 = await voting.candidateLogin();
+    console.log("role1 val: ", role1.role);
+    console.log("role2 val: ", role2.role);
+    if (role1.role) {
+      setRole(role1.role);
+    } else if (role2.role) {
+      setRole(role2.role);
+    } else {
+      alert("You are not registered");
+    }
+  };
+
+  const vote = async (i) => {
+    await voting.voteSimple(state.c[i]);
+  }
+
+  useEffect(() => {
+    getCandidates();
+    getRole();
+  },[])
+
+  useEffect(() => {
+    console.log(candidates);
+  },[candidates]);
+
+
+  
+
   return (
     <>
       <Nav />
@@ -16,15 +56,15 @@ export default function Individual() {
               <img
                 alt="content"
                 className="object-cover object-center h-full w-full"
-                src={Image}
+                src={`https://cloudflare-ipfs.com/ipfs/${state.imageHash}`}
               />
             </div>
             <div>
               <h1 className="text-transparent md:text-7xl text-4xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 bebas">
-                Position
+                {state.position}
               </h1>
               <h1 className="text-transparent md:text-4xl text-2xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 bebas">
-                STATE
+                {state.state}
               </h1>
             </div>
             <div className="w-full h-0.5 bg-white mt-4"></div>
@@ -75,59 +115,29 @@ export default function Individual() {
             <section className="text-gray-600 body-font">
               <div className="flex flex-wrap -m-4">
                 {/* Card Component Start */}
-                <div className="p-4 lg:w-1/3  w-full ">
+                {candidates.map((candidate,i)=> <div className="p-4 lg:w-1/3  w-full ">
                   <div className="rounded-lg overflow-hidden">
                     <img
-                      src={Image}
+                      src={`https://gateway.pinata.cloud/ipfs/${candidate.hash}`}
                       alt=""
                       className="w-full border rounded-t-2xl"
                     />
                     <div className=" bg-lime-400 bg-opacity-75 px-8 py-6   relative">
                       <h1 className="title-font md:text-5xl text-xl font-medium text-gray-900 bebas">
-                        Name
+                        {candidate.name}
                       </h1>
                       {/* Render Button if role == User else do not render */}
-                      <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
+                      {role =="user" ? <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg" onClick={(e) => {e.preventDefault();vote(i)}}>
                         Vote
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                {/* Card Component End */}
-                <div className="p-4 lg:w-1/3  w-full">
-                  <div className="rounded-lg overflow-hidden">
-                    <img
-                      src={Image}
-                      alt=""
-                      className="w-full border rounded-t-2xl"
-                    />
-                    <div className=" bg-lime-400 bg-opacity-75 px-8 py-6   relative">
+                      </button> : ""}
                       <h1 className="title-font md:text-5xl text-xl font-medium text-gray-900 bebas">
-                        Name
+                        {candidate.votes.toNumber()}
                       </h1>
-                      <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
-                        Vote
-                      </button>
                     </div>
                   </div>
-                </div>
-                <div className="p-4 lg:w-1/3  w-full">
-                  <div className="rounded-lg overflow-hidden">
-                    <img
-                      src={Image}
-                      alt=""
-                      className="w-full border rounded-t-2xl"
-                    />
-                    <div className=" bg-lime-400 bg-opacity-75 px-8 py-6   relative">
-                      <h1 className="title-font md:text-5xl text-xl font-medium text-gray-900 bebas">
-                        Name
-                      </h1>
-                      <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
-                        Vote
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                  </div>)
+                }
+                
               </div>
             </section>
           </div>

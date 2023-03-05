@@ -20,8 +20,7 @@ export default function Register() {
 
   const handleImage = async (e) => {
     const imageResponse = await uploadFileToIPFS(e.target.files[0]);
-    setImage(imageResponse.pinataURL);
-    console.log(image.pinataURL);
+    setImage(imageResponse);
   };
 
   const handleRegister = async (e) => {
@@ -29,7 +28,8 @@ export default function Register() {
     if (role == "user") {
       await voting.userRegister(name);
     } else {
-      await voting.candidateRegister(name, "xyz");
+      
+      await voting.candidateRegister(name, image.hash);
     }
   };
 
@@ -40,8 +40,8 @@ export default function Register() {
   };
 
   useEffect(() => {
-    console.log(account);
-  }, [account]);
+    console.log(image);
+  }, [image]);
   return (
     <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
       <div className="mx-auto h-full sm:w-max">
