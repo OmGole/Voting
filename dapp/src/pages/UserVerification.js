@@ -1,8 +1,10 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import Tesseract from "tesseract.js";
 import Nav from "../components/Nav";
 var validator = require("aadhaar-validator");
 export default function UserVerification() {
+  let { ballot } = useLocation();
   const [isLoading, setIsLoading] = React.useState(false);
   const [image, setImage] = React.useState("");
   const [text, setText] = React.useState("");
@@ -42,17 +44,21 @@ export default function UserVerification() {
               {!isLoading && text && isVerified && (
                 <>
                   <h1>Verified</h1>
-                  <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
-                    Continue
-                  </button>
+                  <Link to="/individual" state={ballot}>
+                    <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
+                      Continue
+                    </button>
+                  </Link>
                 </>
               )}
               {!isLoading && text && !isVerified && (
                 <>
                   <h1>Not authorized</h1>
-                  <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
-                    Continue
-                  </button>
+                  <Link to="/dashboard">
+                    <button className="bg-[#BE6DB7] text-white font-bold py-2 px-4 rounded-lg">
+                      Continue
+                    </button>
+                  </Link>
                 </>
               )}
 
