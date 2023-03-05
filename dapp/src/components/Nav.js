@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/logo.png";
+import useConnect from "../hooks/useConnect";
+import useContract from "../hooks/useContract";
 import { Link } from "react-router-dom";
-// import { ethers } from "ethers";
-// import { useEffect, useState } from "react";
-// import useConnect from "../hooks/useConnect";
 
 export default function Nav() {
-  //   const { connect, account } = useConnect();
+  const { connect, account } = useConnect();
+  const { voting } = useContract();
 
-  //   const connectWallet = async () => {};
-
-  //   useEffect(() => {
-  //     connect();
-  //   }, []);
+  const [role, setRole] = useState("");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    connect();
+    const role1 = await voting.userLogin();
+    const role2 = await voting.candidateLogin();
+    console.log("role1 val: ", role1.role);
+    console.log("role2 val: ", role2.role);
+    if (role1.role) {
+      setRole(role1.role);
+    } else if (role2.role) {
+      setRole(role2.role);
+    } else {
+      alert("You are not registered");
+    }
+  };
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -29,7 +40,7 @@ export default function Nav() {
           >
             Register
           </Link>
-          <a className="mr-5 hover:text-white text-slate-400 poppins" href="#">
+          <a className="mr-5 hover:text-white text-slate-400 poppins" href="" onClick={handleLogin}>
             Login
           </a>
         </nav>

@@ -4,8 +4,8 @@ import Image from "../assets/hero1.jpg";
 import { useParams } from "react-router-dom";
 
 export default function Individual() {
-  let { id } = useParams();
-  console.log(id);
+  // let { id } = useParams();
+  // console.log(state);
   return (
     <>
       <Nav />

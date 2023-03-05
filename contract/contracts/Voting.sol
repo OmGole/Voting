@@ -67,8 +67,8 @@ contract Voting {
         return 1;
     }
 
-    function addCandidate(uint256 _index, address candidate) public {
-        ballots[_index].c.push(candidate);
+    function addCandidate(uint256 _index) public {
+        ballots[_index].c.push(msg.sender);
     }
 
     function getBallots() public view returns (Ballot[] memory) {
@@ -104,6 +104,7 @@ contract Voting {
     function voteSimple(address _add) public returns (uint256) {
         require(users[msg.sender].voted == false, "Already voted");
         candidates[_add].votes++;
+        users[msg.sender].voted = true;
         return candidates[_add].votes;
     }
 
@@ -112,6 +113,7 @@ contract Voting {
         for (uint i = 0; i < _adds.length; i++) {
             candidates[_adds[i]].votes++;
         }
+        users[msg.sender].voted = true;
     }
 
     function voteRank(address[] memory _adds) public {
@@ -121,6 +123,7 @@ contract Voting {
                 candidates[_adds[i]].votes +
                 (_adds.length - i);
         }
+        users[msg.sender].voted = true;
     }
 
     function result(address[] memory _adds) public returns (address[] memory) {
