@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Individual from "./pages/Individual";
+import Createpoll from "./pages/Createpoll";
+import UserVerification from "./pages/UserVerification";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/individual" element={<Individual />} />
+        <Route path="/createpoll" element={<Createpoll />} />
+        <Route path="/userverification" element={<UserVerification />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
